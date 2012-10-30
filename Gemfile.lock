@@ -2,9 +2,17 @@ GEM
   remote: https://rubygems.org/
   specs:
     rake (0.8.7)
+    redis (3.0.2)
+    redis-classy (1.2.0)
+      redis-namespace (~> 1.0)
+    redis-mutex (2.0.0)
+      redis-classy (~> 1.2)
+    redis-namespace (1.2.1)
+      redis (~> 3.0.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   rake (= 0.8.7)
+  redis-mutex

@@ -1,3 +1,5 @@
+require 'redis/mutex'
+
 module App
   class Queue
     attr_reader :tasks
@@ -8,18 +10,28 @@ module App
     end
 
     def push(task)
-      tasks << task
-      tasks.sort! { |task1, task2| task1.finish_time <=> task2.finish_time }
+      with_lock do
+        tasks << task
+        tasks.sort! { |task1, task2| task1.finish_time <=> task2.finish_time }
+      end
     end
 
     def pop
-      tasks.shift
+      with_lock do
+        tasks.shift
+      end
     end
 
     def get_task(finish_time)
-      return if tasks.empty?
-      return tasks.shift if tasks.first.finish_time <= finish_time
+      with_lock do
+        return if tasks.empty?
+        return tasks.shift if tasks.first.finish_time <= finish_time
+      end
     end
 
+    private
+    def with_lock
+      Redis::Mutex.with_lock(:tasks) { yield }
+    end
   end
 end
