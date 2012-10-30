@@ -1,13 +1,6 @@
-require 'test/unit'
-require 'app'
+require 'test_helper'
 
-class TaskTest < Test::Unit::TestCase
-  def setup
-    @finish_time = Time.now + 1000
-    @description = 'Test description'
-    @task = App::Task.new(:finish_time => @finish_time, :description => @description)
-  end
-
+class TaskTest < AppTest
   def test_class_for_instance
     assert_instance_of(App::Task, @task)
   end
