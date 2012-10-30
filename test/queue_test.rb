@@ -9,10 +9,6 @@ class QueueTest < AppTest
     @task_oldest.finish_time = @finish_time - 1000
   end
 
-  def test_class_for_instance
-    assert_instance_of(App::Queue, @queue)
-  end
-
   def test_respond_to_push
     assert_respond_to(@queue, :push)
   end

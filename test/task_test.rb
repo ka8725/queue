@@ -1,10 +1,6 @@
 require 'test_helper'
 
 class TaskTest < AppTest
-  def test_class_for_instance
-    assert_instance_of(App::Task, @task)
-  end
-
   def test_description_existance
     assert_equal(@task.description, @description)
   end

@@ -8,4 +8,12 @@ class AppTest < Test::Unit::TestCase
     @task = App::Task.new(:finish_time => @finish_time, :description => @description)
     @queue = App::Queue.new
   end
+
+  def test_class_for_task_instance
+    assert_instance_of(App::Task, @task)
+  end
+
+  def test_class_for_queue_instance
+    assert_instance_of(App::Queue, @queue)
+  end
 end
