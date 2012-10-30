@@ -4,7 +4,7 @@ require 'rake/testtask'
 desc 'Default: run unit tests'
 task :default => :test
 
-desc 'Test the queue'
+desc 'Test the application'
 Rake::TestTask.new(:test) do |t|
   t.libs << 'lib'
   t.libs << 'test'
