@@ -77,6 +77,15 @@ class QueueTest < AppTest
     assert_equal([], @queue.send(:tasks))
   end
 
+  def test_thread_safe
+    20.times { @queue.push(@task) }
+    threads = [].tap do
+      10.times { @queue.pop }
+    end
+    threads.each(&:join)
+    assert_equal(10, @queue.send(:tasks).count)
+  end
+
   private
   def fill_queue_with_tasks(tasks = [@task, @task_newest, @task_oldest])
     tasks.each { |t| @queue.push(t) }
